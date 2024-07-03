@@ -1,17 +1,27 @@
 #!/bin/bash
 
-# Note: This script has not been tested with macOS
+# Note: This script currently only supports Debian-based systems (it uses sudo apt-get)
+# This script is untested with MacOS
 
 # Function to check if a command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
+# Update package manager 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    sudo apt-get update
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    brew update
+else
+    echo "Unsupported OS type: $OSTYPE"
+    exit 1
+fi
+
 # Install Python 3 if not installed
 if ! command_exists python3; then
     echo "Python3 is not installed. Installing Python3..."
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        sudo apt-get update
         sudo apt-get install -y python3 python3-pip
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         brew install python3
@@ -135,8 +145,6 @@ EOL
 # Make launch.sh executable
 chmod +x launch.sh
 
-echo "launch.sh created successfully."
-
 # Create a .desktop file for the application
 # Note it's important Exec is wrapped in quotes & Icon isn't
 DESKTOP_ENTRY="[Desktop Entry]
@@ -150,8 +158,8 @@ Type=Application"
 
 echo "$DESKTOP_ENTRY" | sudo tee /usr/share/applications/MP3ScriptRoller.desktop > /dev/null
 
-echo "Setup completed successfully."
-echo "---python3 & pip3 locations:"
+echo "Setup finished."
+echo "---python3 & pip3 locations (for verifying environment):"
 which python3
 which pip3
 
