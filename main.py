@@ -92,36 +92,42 @@ def delete_file(filename):
     tk.Button(confirm_dialog, text="Cancel", command=confirm_dialog.destroy).pack(side=tk.RIGHT, padx=10, pady=10)
     tk.Button(confirm_dialog, text="Confirm", command=on_confirm).pack(side=tk.RIGHT, padx=10, pady=10)
 
+def truncate_filename(filename, length=30):
+    if len(filename) > length:
+        return filename[:length - 3] + "..."
+    return filename
+
 def add_file_to_list(filename):
     base_filename = os.path.splitext(os.path.basename(filename))[0]
     
     frame = tk.Frame(files_frame)
     frame.pack(fill='x', pady=2)
     
-    label = tk.Label(frame, text=os.path.basename(filename), anchor='w', width=30)  # Fixed width for filenames
-    label.grid(row=0, column=0, padx=5, sticky='w')
+    # Use the truncate_filename function to limit the filename length
+    truncated_filename = truncate_filename(os.path.basename(filename), length=30)
+    label = tk.Label(frame, text=truncated_filename, anchor='w', width=30)  # Fixed width for filenames
+    label.grid(row=0, column=0, padx=0, sticky='w')
     
     play_button = tk.Button(frame, text="Play", bg="purple", fg="white", command=lambda: play_file(filename))
-    play_button.grid(row=0, column=1, padx=5, sticky='e')
+    play_button.grid(row=0, column=1, padx=3, sticky='e')
 
     change_lpf_button = tk.Button(frame, text="Change LPF", command=lambda: open_change_lpf_dialog(filename))
-    change_lpf_button.grid(row=0, column=2, padx=5, sticky='e')
+    change_lpf_button.grid(row=0, column=2, padx=3, sticky='e')
     if not check_srt_file_exists(base_filename):
         change_lpf_button.config(state=tk.DISABLED)
     
     delete_button = tk.Button(frame, text="Delete", bg="lightgrey", fg="black", command=lambda: delete_file(filename))
-    delete_button.grid(row=0, column=3, padx=5, sticky='e')
+    delete_button.grid(row=0, column=3, padx=3, sticky='e')
 
     lpf_value = file_lines_per_frame.get(filename, 0)
     lpf_label = tk.Label(frame, text=f"LPF: {lpf_value}")
-    lpf_label.grid(row=0, column=4, padx=5, sticky='e')
+    lpf_label.grid(row=0, column=4, padx=3, sticky='e')
 
-    ass_icon = tk.Label(frame, text="ASS: ✔️" if check_ass_file_exists(base_filename) else "ASS: ❌\t  ", fg="green" if check_ass_file_exists(base_filename) else "red")
-    ass_icon.grid(row=0, column=5, padx=5, sticky='e')
+    ass_icon = tk.Label(frame, text="ASS: ✔️" if check_ass_file_exists(base_filename) else "ASS: ❌", fg="green" if check_ass_file_exists(base_filename) else "red")
+    ass_icon.grid(row=0, column=5, padx=3, sticky='e')
 
-    srt_icon = tk.Label(frame, text="SRT: ✔️" if check_srt_file_exists(base_filename) else "SRT: ❌\t  ", fg="green" if check_srt_file_exists(base_filename) else "red")
-    srt_icon.grid(row=0, column=6, padx=5, sticky='e')
-
+    srt_icon = tk.Label(frame, text="SRT: ✔️" if check_srt_file_exists(base_filename) else "SRT: ❌", fg="green" if check_srt_file_exists(base_filename) else "red")
+    srt_icon.grid(row=0, column=6, padx=3, sticky='e')
 
 def play_file(filename):
     base_filename = os.path.splitext(os.path.basename(filename))[0]
@@ -259,7 +265,7 @@ def update_file_list():
 # Create the main application window
 root = tk.Tk()
 root.title("MP3ScriptRoller")
-root.geometry("1000x600")
+root.geometry("800x600")
 
 # Create a canvas with a scrollbar
 canvas = tk.Canvas(root)
@@ -281,7 +287,7 @@ canvas.pack(side="left", fill="both", expand=True)
 scrollbar.pack(side="right", fill="y")
 
 # Create a button to add files
-add_button = tk.Button(root, text="Add MP3 Files", command=add_file)
+add_button = tk.Button(root, text="Add MP3 Files", bg="purple", fg="white", command=add_file)
 add_button.pack(pady=10)
 
 # Load files on startup
