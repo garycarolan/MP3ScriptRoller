@@ -115,6 +115,41 @@ else
     echo "Whisper.cpp is already set up."
 fi
 
+# Create launch.sh with the absolute path to main.py
+echo "Creating launch.sh..."
+main_py_path=$(pwd)/main.py
+
+cat <<EOL > launch.sh
+#!/bin/bash
+
+APP_NAME="main.py"
+
+# Check if the application is already running
+if pgrep -f "\$APP_NAME" > /dev/null; then
+    echo "\$APP_NAME is already running."
+else
+    python3 "$main_py_path"
+fi
+EOL
+
+# Make launch.sh executable
+chmod +x launch.sh
+
+echo "launch.sh created successfully."
+
+# Create a .desktop file for the application
+# Note it's important Exec is wrapped in quotes & Icon isn't
+DESKTOP_ENTRY="[Desktop Entry]
+Version=1.0
+Name=MP3ScriptRoller
+Comment=Transcribe MP3 Files
+Exec=\"$(pwd)/launch.sh\"
+Icon=$(pwd)/data/OlaAki.png
+Terminal=false
+Type=Application"
+
+echo "$DESKTOP_ENTRY" | sudo tee /usr/share/applications/MP3ScriptRoller.desktop > /dev/null
+
 echo "Setup completed successfully."
 echo "---python3 & pip3 locations:"
 which python3

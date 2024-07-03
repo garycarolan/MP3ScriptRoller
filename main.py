@@ -258,7 +258,7 @@ def update_file_list():
 
 # Create the main application window
 root = tk.Tk()
-root.title("MP3 File List")
+root.title("MP3ScriptRoller")
 root.geometry("1000x600")
 
 # Create a canvas with a scrollbar
