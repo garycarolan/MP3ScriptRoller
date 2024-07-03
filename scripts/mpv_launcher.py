@@ -19,6 +19,7 @@ def launch_mpv(mp3_filename, transcripts_dir):
     # Construct the command
     command = [
         'mpv',
+        '--force-window',
         '--sub-files=' + main_sub_file,
         '--sid=1',
         audio_file

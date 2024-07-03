@@ -259,7 +259,7 @@ def update_file_list():
 # Create the main application window
 root = tk.Tk()
 root.title("MP3 File List")
-root.geometry("800x600")
+root.geometry("1000x600")
 
 # Create a canvas with a scrollbar
 canvas = tk.Canvas(root)

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Note: This script has not been tested with macOS
+
 # Function to check if a command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
@@ -39,6 +41,21 @@ fi
 # Install required Python packages
 echo "Installing required Python packages..."
 pip3 install -r data/requirements.txt
+
+# Install tkinter
+if ! python3 -c "import tkinter" &> /dev/null; then
+    echo "Tkinter is not installed. Installing Tkinter..."
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        sudo apt-get install -y python3-tk
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        brew install python-tk
+    else
+        echo "Please install Tkinter manually for your OS."
+        exit 1
+    fi
+else
+    echo "Tkinter is already installed."
+fi
 
 # Install MPV
 if ! command_exists mpv; then
@@ -91,7 +108,8 @@ if [ ! -d "whisper.cpp" ]; then
     git clone https://github.com/ggerganov/whisper.cpp.git
     cd whisper.cpp
     echo "Downloading Whisper models..."
-    ./models/download-ggml-model.sh small
+    ./models/download-ggml-model.sh small.en
+    make small.en
     cd ..
 else
     echo "Whisper.cpp is already set up."
