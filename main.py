@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog
 import json
 import shutil  # For copying files
+import platform
 
 # Define the paths to the data and scripts directories
 data_dir = os.path.join(os.path.dirname(__file__), 'data')
@@ -21,6 +22,12 @@ if not os.path.exists(transcripts_dir):
 added_files = set()
 file_lines_per_frame = {}
 
+def get_python_executable():
+    if platform.system() == "Windows":
+        return "python"
+    else:
+        return "python3"
+
 def check_ass_file_exists(base_filename):
     return os.path.isfile(os.path.join(transcripts_dir, base_filename + '.ass'))
 
@@ -29,18 +36,18 @@ def check_srt_file_exists(base_filename):
 
 def call_mp3_to_srt(mp3_filename, threads):
     script_path = os.path.join(scripts_dir, 'mp3_to_srt.py')
-    subprocess.run(['python', script_path, mp3_filename, str(threads), transcripts_dir], check=True)
+    subprocess.run([get_python_executable(), script_path, mp3_filename, str(threads), transcripts_dir], check=True)
 
 def call_create_transcript(srt_filename, added_lines, filename=None):
     script_path = os.path.join(scripts_dir, 'create_transcript.py')
-    subprocess.run(['python', script_path, srt_filename, str(added_lines), transcripts_dir], check=True)
+    subprocess.run([get_python_executable(), script_path, srt_filename, str(added_lines), transcripts_dir], check=True)
     file_lines_per_frame[filename or srt_filename] = added_lines + 1  # Store the number of lines per frame
     save_files()  # Save the updated information
     update_file_list()  # Reload the file list after creating a transcript
 
 def call_mpv_launcher(mp3_filename):
     script_path = os.path.join(scripts_dir, 'mpv_launcher.py')
-    subprocess.run(['python', script_path, mp3_filename, transcripts_dir], check=True)
+    subprocess.run([get_python_executable(), script_path, mp3_filename, transcripts_dir], check=True)
 
 def add_file():
     filenames = filedialog.askopenfilenames(filetypes=[("MP3 files", "*.mp3")])
