@@ -113,6 +113,8 @@ else
 fi
 
 # Clone Whisper.cpp and set up models
+whisper_cpp_dir=$(pwd)/whisper.cpp
+
 if [ ! -d "whisper.cpp" ]; then
     echo "Cloning Whisper.cpp repository..."
     git clone https://github.com/ggerganov/whisper.cpp.git
@@ -124,6 +126,11 @@ if [ ! -d "whisper.cpp" ]; then
 else
     echo "Whisper.cpp is already set up."
 fi
+
+# Write the whisper.cpp folder filepath to a .txt file in the "data" folder
+data_dir=$(pwd)/data
+mkdir -p "$data_dir"
+echo "$whisper_cpp_dir" > "$data_dir/whisper_cpp_path.txt"
 
 # Create launch.sh with the absolute path to main.py
 echo "Creating launch.sh..."

@@ -523,3 +523,5 @@ transcripts/newtest.srt
 setup.ps1
 transcripter.code-workspace
 launch.sh
+data/whisper_cpp_path.txt
+transcripts/audio - Copy.ass
