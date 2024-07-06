@@ -160,7 +160,7 @@ Name=MP3ScriptRoller
 Comment=Transcribe MP3 Files
 Exec=\"$(pwd)/launch.sh\"
 Icon=$(pwd)/data/OlaAki.png
-Terminal=false
+Terminal=true
 Type=Application"
 
 echo "$DESKTOP_ENTRY" | sudo tee /usr/share/applications/MP3ScriptRoller.desktop > /dev/null
