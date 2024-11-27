@@ -14,7 +14,7 @@ A desktop entry called "MP3ScriptRoller" should be created allowing you to find 
 
 *Note* - If you want to test this on a virtual machine, VirtualBox will not work. I believe this is because whisper.cpp requires "FMA" CPU instructions, which currently don't work on virtualbox https://www.virtualbox.org/ticket/15471.
 
-The setup and program have been tested with Ubuntu on Hyper-V on Windows 10.
+The setup and program have been tested and work with Ubuntu on Hyper-V on Windows 10. It is possible there are better options than this however.
 
 **Windows** - This project can be set up to work on windows with wsl, but an automated installer script has not been made.
 
