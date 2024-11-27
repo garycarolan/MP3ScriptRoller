@@ -9,14 +9,14 @@ The software used includes:
 
 ## Installation (As of November 2024)
 
-**Linux** (recommended) - "setup.sh" script is tested and working on Debian based Linux operating systems. It is recommended you review the "setup.sh" script before running it. 
+* **Linux** (recommended) - "setup.sh" installation script is tested and working on Debian based Linux operating systems. It is recommended you review the "setup.sh" script before running it. 
 A desktop entry called "MP3ScriptRoller" should be created allowing you to find and launch the application from wherever your other applications are accessed.
 
-*Note* - If you want to test this on a virtual machine, VirtualBox will not work. I believe this is because whisper.cpp requires "FMA" CPU instructions, which currently don't work on virtualbox https://www.virtualbox.org/ticket/15471.
+  *Note* - If you want to test this on a virtual machine, VirtualBox will not work. I believe this is because whisper.cpp requires "FMA" CPU instructions, which currently don't work on virtualbox https://www.virtualbox.org/ticket/15471.
 
-The setup and program have been tested and work with Ubuntu on Hyper-V on Windows 10. It is possible there are better options than this however.
+  The setup and program have been tested and work with Ubuntu on Hyper-V on Windows 10. It is possible there are better options than this however.
 
-**Windows** - This project can be set up to work on windows with wsl, but an automated installer script has not been made.
+* **Windows** - This project can be set up to work on windows with wsl, but an automated installer script has not been made.
 
-**MacOS** - Neither the project itself nor the setup script has been tested for macOS, although some code for macOS exists in the setup.sh file, it is not recommended to run this script on macOS.
+* **MacOS** - Neither the project itself nor the setup script has been tested for macOS, although some code for macOS exists in the setup.sh file, it is not recommended to run this script on macOS.
 
