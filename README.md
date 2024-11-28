@@ -14,9 +14,12 @@ A desktop entry called "MP3ScriptRoller" should be created allowing you to find 
 
   *Note* - If you want to test this on a virtual machine, VirtualBox will not work. I believe this is because whisper.cpp requires "FMA" CPU instructions, which currently don't work on virtualbox https://www.virtualbox.org/ticket/15471.
 
-  The setup and program have been tested and work with Ubuntu on Hyper-V on Windows 10. It is possible there are better options than this however.
+  The setup and program have been tested and works with Hyper-V on Windows 10 (Linux Mint was used). It is possible there are better options than this however.
 
 * **Windows** - This project can be set up to work on windows with wsl, but an automated installer script has not been made.
 
 * **MacOS** - Neither the project itself nor the setup script has been tested for macOS, although some code for macOS exists in the setup.sh file, it is not recommended to run this script on macOS.
 
+## Other Credits
+* "Create_transcript.py" is based on this repository: https://github.com/cubarco/mergesrt2ass/blob/master/mergesrt2ass.py
+* The icon art for the desktop entry on Linux is by @olaakii on instagram https://www.instagram.com/olaakii/
