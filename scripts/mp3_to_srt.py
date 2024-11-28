@@ -37,6 +37,7 @@ def convert_mp3_to_srt(mp3_filename, threads, transcripts_dir):
     # Detect the operating system
     os_type = platform.system()
     
+    # The following whisper commands are set to output to srt and each line has a max of 45 characters
     if os_type == 'Windows':
         # Manually convert Windows path to WSL path
         wav_filename_wsl = '/mnt/' + wav_filename.replace(':', '').replace('\\', '/').replace('C', 'c').replace('c', 'c')
@@ -44,10 +45,10 @@ def convert_mp3_to_srt(mp3_filename, threads, transcripts_dir):
         whisper_cpp_path_wsl = '/mnt/' + whisper_cpp_path.replace(':', '').replace('\\', '/').replace('C', 'c').replace('c', 'c')
 
         # Run whisper.cpp using WSL
-        whisper_command = ['wsl', whisper_cpp_path_wsl + '/main', '-t', threads, '-m', whisper_cpp_path_wsl + '/models/ggml-small.en.bin', '-f', wav_filename_wsl, '-osrt', '-of', srt_filename_wsl]
+        whisper_command = ['wsl', whisper_cpp_path_wsl + '/main', '-t', threads, '-m', whisper_cpp_path_wsl + '/models/ggml-small.en.bin', '-f', wav_filename_wsl, '-osrt', '-of', srt_filename_wsl, '-ml', '45']
     elif os_type == 'Linux':
         # Run whisper.cpp directly on Linux
-        whisper_command = [os.path.join(whisper_cpp_path, 'main'), '-t', threads, '-m', os.path.join(whisper_cpp_path, 'models/ggml-small.en.bin'), '-f', wav_filename, '-osrt', '-of', srt_filename]
+        whisper_command = [os.path.join(whisper_cpp_path, 'main'), '-t', threads, '-m', os.path.join(whisper_cpp_path, 'models/ggml-small.en.bin'), '-f', wav_filename, '-osrt', '-of', srt_filename, '-ml', '45']
     else:
         print("Unsupported operating system")
         sys.exit(1)

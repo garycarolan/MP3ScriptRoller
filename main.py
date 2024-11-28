@@ -140,7 +140,7 @@ def play_file(filename):
                                "(Select no for prompt to convert from mp3)"):
             srt_path = filedialog.askopenfilename(filetypes=[("SRT files", "*.srt")])
             if srt_path:
-                lines_per_frame = simpledialog.askinteger("SRT to Transcript", "Set LPF - Lines Per Frame, default of 5 is recommended:", initialvalue=5)
+                lines_per_frame = simpledialog.askinteger("SRT to Transcript", "Set LPF - Lines Per Frame, default of 10 is recommended:", initialvalue=10)
                 if lines_per_frame:
                     added_lines = lines_per_frame - 1
                     shutil.copyfile(srt_path, os.path.join(transcripts_dir, base_filename + '.srt'))
@@ -149,7 +149,7 @@ def play_file(filename):
         else:
             open_threads_and_lines_dialog(filename)
     elif srt_exists and not ass_exists:
-        lines_per_frame = simpledialog.askinteger("SRT to Transcript", "Set LPF - Lines Per Frame, default of 5 is recommended:", initialvalue=5)
+        lines_per_frame = simpledialog.askinteger("SRT to Transcript", "Set LPF - Lines Per Frame, default of 10 is recommended:", initialvalue=10)
         if lines_per_frame:
             added_lines = lines_per_frame - 1
             call_create_transcript(os.path.join(transcripts_dir, base_filename + '.srt'), added_lines, filename)
