@@ -513,17 +513,9 @@ whisper.cpp/tests/en-2-ref.txt
 whisper.cpp/tests/es-0-ref.txt
 whisper.cpp/tests/run-tests.sh
 whisper.cpp/tests/test-whisper.js
-transcripts/5-meo-msbt final patreon.ass
-transcripts/5-meo-msbt final patreon.srt
-transcripts/audio - copy.srt
-transcripts/audio.ass
-transcripts/audio.srt
-transcripts/newtest.ass
-transcripts/newtest.srt
+transcripts/*
 setup.ps1
 transcripter.code-workspace
 launch.sh
 data/whisper_cpp_path.txt
-transcripts/audio - Copy.ass
-transcripts/reallyreallylongtestfilenametestfile.wav
 MP3ScriptRoller.code-workspace

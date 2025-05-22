@@ -212,7 +212,7 @@ def open_threads_and_lines_dialog(filename):
     threads_entry.grid(row=2, column=1, pady=5, padx=10, sticky='w')
 
     # Additional information for lines per frame
-    lines_info_label = tk.Label(dialog, text="Below is the number of previous lines of dialogue shown at a given time, 5 is recommended and entered by default, "
+    lines_info_label = tk.Label(dialog, text="Below is the number of previous lines of dialogue shown at a given time, 10 is recommended and entered by default, "
                                 "you can change this quickly at any time without re-running Whisper.cpp. ", wraplength=350, justify='left')
     lines_info_label.grid(row=3, column=0, columnspan=2, pady=5, padx=10)
 
@@ -220,7 +220,7 @@ def open_threads_and_lines_dialog(filename):
     tk.Label(dialog, text="Lines per frame:").grid(row=4, column=0, pady=5, padx=10, sticky='e')
     lines_entry = tk.Entry(dialog, width=3)
     lines_entry.grid(row=4, column=1, pady=5, padx=10, sticky='w')
-    lines_entry.insert(0, "5")  # Set default value to 5
+    lines_entry.insert(0, "10")  # Set default value to 10
 
     def on_confirm():
         try:
